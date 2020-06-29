@@ -24,9 +24,9 @@ resource "aws_instance" "wp" {
     instance_type       = var.instance_wp_type
     subnet_id           = element(aws_subnet.front.*.id, count.index)
     key_name            = var.public_key_name
-    user_data           = data.template_file.script.rendered
+    #user_data           = data.template_file.script.rendered
+    user_data           = file("${path.module}/../../scripts/install-apache.sh")
     security_groups     = aws_security_group.front_sg.*.id
-    user_data           = "${file("install.sh")}"
 }
 
 resource "local_file" "hosts_cfg" {
