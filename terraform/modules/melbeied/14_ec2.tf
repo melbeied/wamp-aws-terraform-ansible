@@ -37,7 +37,7 @@ resource "local_file" "hosts_cfg" {
       
     }
   )
-  filename = "../ansible/hosts.cfg"
+  filename = "../ansible/hosts"
 }
 //cidr_partial_wildcards
 resource "local_file" "ssh_cfg" {

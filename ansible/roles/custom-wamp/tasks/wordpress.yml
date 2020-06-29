@@ -12,11 +12,17 @@
     extra_opts: [--strip-components=1]
   become: yes
 
-- name: subtitute index.php 
+- name: subtitute for rendering wp-config.php 
   template:
     src: "wp-config.php.j2"
     dest: "{{ wordpress_directory }}/wp-config.php"
   tags: [ wordpress ]
+
+- name: Remove sample file =  {{ wordpress_directory }}/wp-config-sample.php 
+  file:
+    state: absent
+    path: "{{ wordpress_directory }}/wp-config-sample.php"
+  become: yes
 
 ## TODO : verifi wp-config-sample.php
 

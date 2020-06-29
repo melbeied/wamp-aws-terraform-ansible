@@ -12,4 +12,5 @@ keys/
 
 *.bck
 **/*.bck
-../*.backup
+**/*.backup
+**/terraform.tfstate.backup
