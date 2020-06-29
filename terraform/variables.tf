@@ -1,5 +1,5 @@
 variable "ami_id" {
-  default = "ami-0c24eddbea3a65909"
+  default = "ami-0c24eddbea3a65909" // debian buster
 }
 
 variable "instance_bastion_type" {

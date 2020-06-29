@@ -15,8 +15,10 @@
 - name: subtitute index.php 
   template:
     src: "wp-config.php.j2"
-    dest: "{{ wordpress_directory }}/index.php"
+    dest: "{{ wordpress_directory }}/wp-config.php"
   tags: [ wordpress ]
+
+## TODO : verifi wp-config-sample.php
 
 - name: Attempt to change ownership on {{ wordpress_directory }}
   file:
