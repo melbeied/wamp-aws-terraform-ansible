@@ -1,0 +1,72 @@
+---
+- name: Installation de Docker CE
+  hosts: 127.0.0.1   
+  connection: local
+  gather_facts: no
+  vars:
+    - username: vagrant
+  user: "{{username}}"
+  become: yes   
+  tasks:
+    - name: Installation de prérequises yum utils, device-mapper-persistent-data, lvm2
+      yum: name={{ item }} state=latest 
+      loop: ['yum-utils', 'device-mapper-persistent-data', 'lvm2']
+    - name: Add Docker repo
+      get_url:
+        url: https://download.docker.com/linux/centos/docker-ce.repo
+        dest: /etc/yum.repos.d/docer-ce.repo
+      
+    - name: Install Docker
+      package:
+        name: docker-ce
+        state: latest
+      
+    - name: Start Docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
+      
+    - name: Add user {{ username }} to docker group
+      user:
+        name: "{{ username }}"
+        groups: docker
+        append: yes
+        
+    - name: Start service docker, if not running
+      service:
+        name: docker
+        state: started
+    
+    # - name: Check if Docker Compose is installed
+    #   command: docker-compose --version
+    #   register: docker_compose_check
+    #   ignore_errors: yes
+
+    - name: Download and install Docker Compose
+      get_url:
+        url: https://github.com/docker/compose/releases/download/1.21.2/docker-compose-Linux-x86_64
+        dest: /usr/bin/docker-compose
+        mode: 0755
+      # when:
+      #   - docker_compose_check.msg is defined
+      #   - docker_compose_check.msg.find('No such file or directory') != -1
+    
+        # - name: Installation docker-compose
+    #   yum: 
+    #     name: docker-compose=1.8.*
+    #     state: latest 
+    # - name: Install docker-compose
+    #   remote_user: ubuntu
+    #   get_url: 
+    #     url : https://github.com/docker/compose/releases/download/1.25.1-4/docker-compose-Linux-x86_64
+    #     dest: /usr/local/bin/docker-compose
+    #     mode: 'u+x,g+x'
+    # - name: Setup default git configuraiton
+    #   git_config:
+    #     name="{{ item.name }}"
+    #     scope=global
+    #     value="{{ item.value }}"
+    #   with_items:
+    #     - {name: "user.name",  value: "melbeied" }
+    #     - {name: "user.email", value: "melbeied@gmail.com" }

@@ -1,0 +1,11 @@
+
+# roles/wordpress/defaults/main.yml
+wordpress_directory: '/var/www/{{domain}}'
+httpd_configuration_dir : '/etc/apache2'
+wordpress_httpd_configuration: '/etc/apache2/sites-available/{{httpd_conf}}'
+wordpress_configuration: '/etc/wordpress/wp-config.php'
+
+wordpress_plugin_directory: "{{ wordpress_directory }}/wp-content/plugins"
+wordpress_theme_directory: "{{ wordpress_directory }}/wp-content/themes"
+
+app_user: www-data

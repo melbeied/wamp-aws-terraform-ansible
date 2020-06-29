@@ -1,0 +1,14 @@
+
+- name: Install required software for http web server
+  apt: 
+    name:
+      - ufw
+      - apache2
+      - apache2-utils
+      - php{{ php_version }}
+      - php{{ php_version }}-mysql
+      - libapache2-mod-php{{ php_version }}
+      - python-mysqldb
+      - mariadb-client
+    state : present
+  become: yes

@@ -1,0 +1,14 @@
+- name: Install required software for http web server
+  apt: 
+    name: 
+      - php{{ php_version }}-curl
+      - php{{ php_version }}-gd
+      - php{{ php_version }}-mbstring
+      - php{{ php_version }}-xml
+      - php{{ php_version }}-xmlrpc
+      - php{{ php_version }}-soap
+      - php{{ php_version }}-intl
+      - php{{ php_version }}-zip
+      - php{{ php_version }}-memcache
+    state : present     
+  become: yes

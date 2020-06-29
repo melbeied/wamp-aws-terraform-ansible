@@ -1,0 +1,13 @@
+.DS_Store
+
+**/.terraform/
+**/*.tfstate
+
+keys/
+**/keys/
+.idea/
+**/.vagrant/
+
+*.bck
+**/*.bck
+

@@ -1,0 +1,22 @@
+Vagrant.configure("2") do |config|
+    config.vm.define "debian-vm"
+    config.vm.box = "debian/buster64"
+    config.vm.network "forwarded_port", guest: 80, host: 8088
+    config.vm.network "private_network", ip: "192.168.34.100" 
+
+    
+    
+    config.vm.provider "virtualbox" do |v|
+      v.cpus = 4
+      v.memory = 4096
+    end
+    
+    config.vm.synced_folder '.', '/vagrant', type: "rsync", rsync__exclude: ".vagrant/"
+    config.vm.provision :shell, path: "./ext/ansible.sh"
+    config.vm.provision :shell, inline: "export ANSIBLE_HOST_KEY_CHECKING=False"
+    config.vm.provision 'ansible' do |ansible|
+        ansible.playbook = "ext/playbook-docker.yml"
+        ansible.verbose = 'vv'
+        ansible.become = true
+      end
+  end

@@ -1,0 +1,20 @@
+domain: melbeied.net
+httpd_conf : wordpress.conf
+http_port : 80
+php_major_version: 7
+php_version: 7.3
+wp_version : 5.4.2
+tmp_dir : /tmp
+
+wordpress_database_host: 127.0.0.1
+wordpress_database: dbwordpress
+wordpress_user: root
+wordpress_password: root123987
+
+wordpress_plugins: []
+wordpress_themes: []
+
+wordpress_force_ssl: false
+wordpress_allow_file_mods: true
+wordpress_automatic_updates: true
+wordpress_debug: false

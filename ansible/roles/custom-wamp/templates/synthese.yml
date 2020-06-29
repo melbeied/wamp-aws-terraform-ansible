@@ -1,0 +1,12 @@
+19:define('DB_NAME', '{{ wordpress_database }}');
+22:define('DB_USER', '{{ wordpress_user }}');
+25:define('DB_PASSWORD', '{{ wordpress_password }}');
+28:define('DB_HOST', '{{ wordpress_database_host }}');
+31:define('DB_CHARSET', 'utf8');
+34:define('DB_COLLATE', '');
+42:define('FORCE_SSL_ADMIN', true);
+43:define('FORCE_SSL_LOGIN', true);
+77:define('DISALLOW_FILE_MODS', {{ not wordpress_allow_file_mods }});
+80:define('AUTOMATIC_UPDATER_DISABLED', {{ not wordpress_automatic_updates }});
+91:define('WP_DEBUG', {{ wordpress_debug }});
+97:  define('ABSPATH', '{{ wordpress_directory }}');

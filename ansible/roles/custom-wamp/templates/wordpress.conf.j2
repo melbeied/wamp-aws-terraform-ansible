@@ -1,0 +1,16 @@
+<VirtualHost *:80>
+     ServerAdmin admin@{{domain}}
+      DocumentRoot {{wordpress_directory}}
+     ServerName your-domain.com
+
+     <Directory {{wordpress_directory}}>
+          #Options FollowSymlinks
+          #AllowOverride All
+          AllowOverride Options
+          Require all granted
+     </Directory>
+
+     ErrorLog ${APACHE_LOG_DIR}/{{domain}}_error.log
+     CustomLog ${APACHE_LOG_DIR}/{{domain}}_access.log combined
+
+</VirtualHost>
