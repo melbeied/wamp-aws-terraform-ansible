@@ -40,21 +40,21 @@ resource "aws_alb_listener" "listener_http" {
   }
 }
 
-resource "aws_alb_listener" "listner_https" {
-    load_balancer_arn = aws_alb.alb.arn
-    port              = "443"
-    protocol          = "HTTPS"
-    depends_on        = [aws_alb_target_group.tg]
-    certificate_arn   = aws_acm_certificate.cert.arn
-    default_action {
-    target_group_arn = aws_alb_target_group.tg.arn
-    type             = "forward"
-    }
-}
+// resource "aws_alb_listener" "listner_https" {
+//     load_balancer_arn = aws_alb.alb.arn
+//     port              = "443"
+//     protocol          = "HTTPS"
+//     depends_on        = [aws_alb_target_group.tg]
+//     certificate_arn   = aws_acm_certificate.cert.arn
+//     default_action {
+//     target_group_arn = aws_alb_target_group.tg.arn
+//     type             = "forward"
+//     }
+// }
 
-resource "aws_lb_listener_certificate" "ssl_cert" {
-    depends_on          = [ aws_acm_certificate.cert, ]
-    listener_arn        = aws_alb_listener.listner_https.arn
-    //certificate_arn = "arn:aws:acm:us-east-1:00012345678:certificate/abcd-abcd-abcd-1234-abcd"
-    certificate_arn     = aws_acm_certificate.cert.arn
-}
+// resource "aws_lb_listener_certificate" "ssl_cert" {
+//     depends_on          = [ aws_acm_certificate.cert, ]
+//     listener_arn        = aws_alb_listener.listner_https.arn
+//     //certificate_arn = "arn:aws:acm:us-east-1:00012345678:certificate/abcd-abcd-abcd-1234-abcd"
+//     certificate_arn     = aws_acm_certificate.cert.arn
+// }

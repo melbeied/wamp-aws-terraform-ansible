@@ -1,5 +1,7 @@
 .DS_Store
 
+**/hosts.cfg
+
 **/.terraform/
 **/*.tfstate
 
@@ -10,4 +12,4 @@ keys/
 
 *.bck
 **/*.bck
-
+../*.backup
