@@ -5,7 +5,7 @@ resource "aws_instance" "bastion" {
     ami = var.ami_id
     availability_zone =  element(data.aws_availability_zones.available.names, 0)
     instance_type = var.instance_bastion_type
-    key_name = var.public_key_name
+    key_name = format("%s", var.public_key_name)
     vpc_security_group_ids = [ aws_security_group.public_alb_sg.id, ]
     subnet_id = element(aws_subnet.public.*.id, 0)
     associate_public_ip_address = true
@@ -23,9 +23,8 @@ resource "aws_instance" "wp" {
     ami                 = var.ami_id
     instance_type       = var.instance_wp_type
     subnet_id           = element(aws_subnet.front.*.id, count.index)
-    key_name            = var.public_key_name
-    #user_data           = data.template_file.script.rendered
-    user_data           = file("${path.module}/../../scripts/install-apache.sh")
+    key_name            = format("%s", var.public_key_name)
+    user_data           = file("${path.module}/../../scripts/user_data_front.sh")
     security_groups     = aws_security_group.front_sg.*.id
 }
 
@@ -46,10 +45,9 @@ resource "local_file" "ssh_cfg" {
       private_key               = format("%s/%s", var.public_key_path, var.public_key_name)  
       cidr_partial_wildcards    = format("%s.%s.*", split (".", aws_vpc.melbeied.cidr_block)[0],split (".", aws_vpc.melbeied.cidr_block)[1])
       bastion_pub_ip            = aws_instance.bastion.public_ip
+      sys_user                  = local.sys_user
       
     }
   )
   filename = "../ansible/ssh.cfg"
 }
-
-//#ssh -o ProxyCommand="ssh -W %h:%p ntc@bastion" ntc@csr1

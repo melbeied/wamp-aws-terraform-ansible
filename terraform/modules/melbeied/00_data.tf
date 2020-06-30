@@ -2,12 +2,13 @@
 data "aws_availability_zones" "available" {}
 
 locals {
-  az_limit = 2
-  site_name = "melbeied.net"
-  project_name = "wamp"
+  az_limit      = 2
+  site_name     = "melbeied.net"
+  project_name  = "wamp"
+  sys_user      = "admin"
 }
 resource "aws_eip" "nat_eip" {
-  vpc = true
+  vpc           = true
 }
 
 // # Gathers information about the VPC that was provided

@@ -11,7 +11,7 @@ variable "instance_wp_type" {
 }
 
 variable "public_key_name" {
-  default   = "terraform_ec2_key"
+  default   = "id_rsa_aws"
 }
 
 variable "public_key_path" {

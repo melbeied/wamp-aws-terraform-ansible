@@ -8,6 +8,7 @@ tmp_dir : /tmp
 
 #wordpress_database_host: 127.0.0.1
 wordpress_database_host: wordpress-db.cpjvnwbi2rqr.us-east-1.rds.amazonaws.com
+#                        wordpress-db.cpjvnwbi2rqr.us-east-1.rds.amazonaws.com
 wordpress_database: dbwordpress
 wordpress_user: root
 wordpress_password: root123987

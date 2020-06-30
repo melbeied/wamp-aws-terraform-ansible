@@ -1,11 +1,7 @@
-output "rds_endpoint" {
-  value = "${module.melbeied.rds_endpoint}"
+output "bastion-public-ip" {
+  value = "${module.melbeied.bastion-public-ip}"
 }
 
 output "rds_address" {
   value = "${module.melbeied.rds_address}"
-}
-
-output "rds_port" {
-  value = "${module.melbeied.rds_port}"
 }
