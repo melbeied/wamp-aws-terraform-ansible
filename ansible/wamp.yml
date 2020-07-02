@@ -1,7 +1,8 @@
 ---
 - name : Installation aws wordpress platforme
-  hosts: all
-  user: admin
+  hosts: web
+  #user: admin
+  remote_user: admin
   gather_facts: yes
   become: yes 
   vars_files:

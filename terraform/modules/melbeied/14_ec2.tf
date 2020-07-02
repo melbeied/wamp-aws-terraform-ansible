@@ -33,7 +33,6 @@ resource "local_file" "hosts_cfg" {
     {
       provate_ips       = aws_instance.wp.*.private_ip
       bastion_pub_ip    = aws_instance.bastion.public_ip
-      
     }
   )
   filename = "../ansible/hosts"

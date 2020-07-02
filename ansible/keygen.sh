@@ -13,3 +13,6 @@ do
     echo "[${line}] add to hosts file"
     rm -f result.txt
 done
+
+
+#ssh -i ../keys/id_rsa_aws   admin@10.0.0.54 -o "proxycommand ssh -W %h:%p -i ../keys/id_rsa_aws admin@3.88.222.252"

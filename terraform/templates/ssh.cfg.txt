@@ -1,0 +1,19 @@
+Host bastion
+  Hostname 3.88.222.252
+  User admin
+  IdentityFile  ./keys/id_rsa_aws
+
+Host 10.0.0.*
+  IdentityFile  ./keys/id_rsa_aws
+  User admin
+  ProxyCommand ssh -F ssh.cfg -W %h:%p  bastion
+
+Host 10.0.1.*
+  IdentityFile  ./keys/id_rsa_aws
+  User admin
+  ProxyCommand ssh -F ssh.cfg -W %h:%p  bastion
+
+Host *
+ ControlMaster   auto
+ ControlPath     ~/.ssh/mux-%r@%h:%p
+ ControlPersist  15m
