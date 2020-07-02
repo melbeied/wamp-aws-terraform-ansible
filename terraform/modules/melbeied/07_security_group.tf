@@ -81,7 +81,7 @@ resource "aws_security_group" "front_sg" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = [ aws_vpc.melbeied.cidr_block, ]
+    cidr_blocks = [ "0.0.0.0/0", ]
   }
   tags = {
     Name        = "private_front_sg_for_22_80_443_flow"
@@ -133,26 +133,26 @@ resource "aws_security_group" "back_sg" {
 }
 
 
-resource "aws_security_group" "efs_sg" {
-  name        = "efs-mnt"
-  description = "Allows NFS traffic from instances within the VPC."
-  vpc_id      = aws_vpc.melbeied.id
+// resource "aws_security_group" "efs_sg" {
+//   name        = "efs-mnt"
+//   description = "Allows NFS traffic from instances within the VPC."
+//   vpc_id      = aws_vpc.melbeied.id
 
-  ingress {
-    from_port = 2049
-    to_port   = 2049
-    protocol  = "tcp"
+//   ingress {
+//     from_port = 2049
+//     to_port   = 2049
+//     protocol  = "tcp"
 
-    cidr_blocks = [ aws_vpc.melbeied.cidr_block, ]
-  }
-  egress {
-    from_port = 0
-    to_port   = 0
-    protocol  = "-1"
+//     cidr_blocks = [ aws_vpc.melbeied.cidr_block, ]
+//   }
+//   egress {
+//     from_port = 0
+//     to_port   = 0
+//     protocol  = "-1"
 
-    cidr_blocks = [ aws_vpc.melbeied.cidr_block, ]
-  }
-  tags = {
-    Name = "allow_nfs-ec2"
-  }
-}
+//     cidr_blocks = [ aws_vpc.melbeied.cidr_block, ]
+//   }
+//   tags = {
+//     Name = "allow_nfs-ec2"
+//   }
+// }

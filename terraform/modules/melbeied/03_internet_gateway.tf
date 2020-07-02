@@ -2,7 +2,7 @@
 resource "aws_internet_gateway" "igt" {
   vpc_id = aws_vpc.melbeied.id
   tags  = {
-    Name = "lonely_igw"
+    Name = "main_igw"
   }
  }
 

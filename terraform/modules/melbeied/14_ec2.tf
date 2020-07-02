@@ -1,5 +1,3 @@
-
-
 resource "aws_instance" "bastion" {
  
     ami = var.ami_id
@@ -19,13 +17,26 @@ resource "aws_instance" "bastion" {
 
 
 resource "aws_instance" "wp" {
-    count               = local.az_limit
-    ami                 = var.ami_id
-    instance_type       = var.instance_wp_type
-    subnet_id           = element(aws_subnet.front.*.id, count.index)
-    key_name            = format("%s", var.public_key_name)
-    user_data           = file("${path.module}/../../scripts/user_data_front.sh")
-    security_groups     = aws_security_group.front_sg.*.id
+    count                       = local.az_limit
+    ami                         = var.ami_id
+    availability_zone           =  element(data.aws_availability_zones.available.names, count.index)
+    instance_type               = var.instance_wp_type
+    key_name                    = format("%s", var.public_key_name)
+    vpc_security_group_ids      = [ aws_security_group.front_sg.id, ]
+    subnet_id                   = element(aws_subnet.front.*.id, count.index)
+    associate_public_ip_address = false
+    user_data                   = file("${path.module}/../../scripts/user_data_front.sh")
+
+    tags = {
+        Name = format("%s-%s","wp_vm", element(data.aws_availability_zones.available.names, 0))
+    }
+}
+
+resource "aws_alb_target_group_attachment" "alb_bfornt_http" {
+  count            = local.az_limit
+  target_group_arn = aws_alb_target_group.tg.arn
+  target_id        = element(aws_instance.wp.*.id, count.index)
+  port             = 80
 }
 
 resource "local_file" "hosts_cfg" {

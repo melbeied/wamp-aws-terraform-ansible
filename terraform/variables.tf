@@ -3,11 +3,11 @@ variable "ami_id" {
 }
 
 variable "instance_bastion_type" {
-  default   = "t2.micro"
+  default   = "t2.medium"
 }
 
 variable "instance_wp_type" {
-  default   = "t2.medium"
+  default   = "t2.large"
 }
 
 variable "public_key_name" {

@@ -1,16 +1,21 @@
 resource "aws_alb" "alb" {
   name = "mainALB"
+  load_balancer_type = "application"
   subnets = aws_subnet.public.*.id
   security_groups = [
     "${aws_security_group.public_alb_sg.id}",
   ]
+  enable_deletion_protection = true
+  ip_address_type = "ipv4"
 }
 
 resource "aws_alb_target_group" "tg" {
   name     = "alb-target-group"
+  vpc_id   = aws_vpc.melbeied.id
+
   port     = 80
   protocol = "HTTP"
-  vpc_id   = aws_vpc.melbeied.id
+  
   stickiness {
     type = "lb_cookie"
   }
@@ -39,6 +44,19 @@ resource "aws_alb_listener" "listener_http" {
     type             = "forward"
   }
 }
+
+// resource "aws_alb_listener" "listner_https" {
+// 	load_balancer_arn	=	"${aws_alb.alb_front.arn}"
+// 	port			=	"443"
+// 	protocol		=	"HTTPS"
+// 	ssl_policy		=	"ELBSecurityPolicy-2016-08"
+// 	certificate_arn		=	"${aws_iam_server_certificate.url1_valouille_fr.arn}"
+
+// 	default_action {
+// 		target_group_arn	=	"${aws_alb_target_group.alb_front_https.arn}"
+// 		type			=	"forward"
+// 	}
+// }
 
 // resource "aws_alb_listener" "listner_https" {
 //     load_balancer_arn = aws_alb.alb.arn
