@@ -3,7 +3,7 @@ data "aws_availability_zones" "available" {}
 
 locals {
   az_limit      = 2
-  site_name     = "melbeied.net"
+  site_name     = var.domaine_name
   project_name  = "wamp"
   sys_user      = "admin"
 }

@@ -1,3 +1,4 @@
+variable "domaine_name" {}
 variable "ami_id" {}
 
 variable "instance_bastion_type" {}

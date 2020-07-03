@@ -4,7 +4,7 @@
 
 **/.terraform/
 **/*.tfstate
-terraform/*.tfvars
+./terraform/*.tfvars
 keys/
 **/keys/
 .idea/
@@ -14,3 +14,5 @@ keys/
 **/*.bck
 **/*.backup
 **/terraform.tfstate.backup
+
+./ansible/vars/datasource.yml

@@ -1,3 +1,6 @@
+variable "domaine_name" {
+  default = "melbeied.net"
+}
 variable "ami_id" {
   default = "ami-0c24eddbea3a65909" // debian buster
 }
