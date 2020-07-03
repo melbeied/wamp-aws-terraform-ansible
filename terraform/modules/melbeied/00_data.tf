@@ -19,6 +19,6 @@ resource "aws_eip" "nat_eip" {
 // }
 
 data "aws_route53_zone" "zone" {
-  name         = "${local.site_name}."
+  name         = "${local.site_name}"
   private_zone = false
 }

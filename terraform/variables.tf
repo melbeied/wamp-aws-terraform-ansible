@@ -17,3 +17,18 @@ variable "public_key_name" {
 variable "public_key_path" {
   default   = "/workspace/vagrant/aws/workspace/wamp-aws-terraform-ansible/keys"
 }
+
+variable "db_instance_type" {
+  default   = "db.t2.medium"
+}
+
+variable "db_name" {
+  default = "wordpressdb"
+}
+
+variable "db_user" {
+  default = "root"
+}
+
+variable "db_password" {
+}

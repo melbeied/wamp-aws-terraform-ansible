@@ -1,12 +1,15 @@
 ---
 - name : Installation aws wordpress platforme
-  hosts: web
+  hosts: web 
+  #ansible_python_interpreter: /usr/bin/python
   #user: admin
   remote_user: admin
   gather_facts: yes
   become: yes 
   vars_files:
     - vars/main.yml
+    - vars/datasource.yml
+
   roles:
     - custom-wamp
 

@@ -5,12 +5,14 @@
     force: no
   become: yes
 
-- name: Extract WordPress  
+- name: Extract WordPress
+  become: yes
+  become_method : sudo
   unarchive: 
     src: "{{ tmp_dir }}/wordpress-{{wp_version}}.tar.gz"
     dest: "{{wordpress_directory}}"
     extra_opts: [--strip-components=1]
-  become: yes
+    remote_src: yes
 
 - name: subtitute for rendering wp-config.php 
   template:

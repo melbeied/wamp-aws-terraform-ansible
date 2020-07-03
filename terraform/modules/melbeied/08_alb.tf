@@ -5,7 +5,7 @@ resource "aws_alb" "alb" {
   security_groups = [
     "${aws_security_group.public_alb_sg.id}",
   ]
-  enable_deletion_protection = true
+  #enable_deletion_protection = true
   ip_address_type = "ipv4"
 }
 
@@ -31,7 +31,6 @@ resource "aws_alb_target_group" "tg" {
     // timeout = "5"
     // unhealthy_threshold = "3"
   }
-
 }
 
 resource "aws_alb_listener" "listener_http" {

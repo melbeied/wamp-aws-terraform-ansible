@@ -31,10 +31,10 @@ resource "aws_db_instance" "default" {
   allocated_storage         = 5
   engine                    = "mysql"
   engine_version            = "5.6.35"
-  instance_class            = "db.t2.micro"
-  name                      = "wpdb"
-  username                  = "root"
-  password                  = "987654321"
+  instance_class            = var.db_instance_type
+  name                      = var.db_name
+  username                  = var.db_user
+  password                  = var.db_password
   db_subnet_group_name      = aws_db_subnet_group.database.id
   vpc_security_group_ids    = [ aws_security_group.back_sg.id, ]
   skip_final_snapshot       = true
@@ -42,3 +42,18 @@ resource "aws_db_instance" "default" {
   option_group_name         = aws_db_option_group.memcache-option-group.name
 }
 
+
+
+resource "local_file" "db_datasource_cfg" {
+  depends_on = [aws_db_instance.default]
+  content = templatefile("${path.module}/../../templates/datasource.tpl",
+    {
+      dbserver_host            = aws_db_instance.default.address
+      db_name                  = var.db_name
+      db_user                  = var.db_user
+      db_password              = var.db_password
+      
+    }
+  )
+  filename = "../ansible/vars/datasource.yml"
+}

@@ -1,5 +1,9 @@
 ---
 # tasks file for webserver
+- name : install python-apt
+  apt :
+    name: python-apt
+    state: latest
 
 - name: Update apt cache 
   apt: 

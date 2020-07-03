@@ -31,7 +31,7 @@ resource "aws_instance" "wp" {
         Name = format("%s-%s","wp_vm", element(data.aws_availability_zones.available.names, 0))
     }
 }
-
+// TODO : change id for aws_alb_target_group_attachment
 resource "aws_alb_target_group_attachment" "alb_bfornt_http" {
   count            = local.az_limit
   target_group_arn = aws_alb_target_group.tg.arn

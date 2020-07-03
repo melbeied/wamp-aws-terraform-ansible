@@ -16,3 +16,6 @@ done
 
 
 #ssh -i ../keys/id_rsa_aws   admin@10.0.0.54 -o "proxycommand ssh -W %h:%p -i ../keys/id_rsa_aws admin@3.88.222.252"
+
+
+#ssh -i ../keys/id_rsa_aws   admin@10.0.0.41 -o "proxycommand ssh -W %h:%p -i ../keys/id_rsa_aws admin@54.174.184.203"
