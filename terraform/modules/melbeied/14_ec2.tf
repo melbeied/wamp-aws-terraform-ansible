@@ -39,6 +39,12 @@ resource "aws_alb_target_group_attachment" "alb_bfornt_http" {
   port             = 80
 }
 
+resource "aws_alb_target_group_attachment" "alb_front_1" {
+  target_group_arn = "${aws_alb_target_group.alb_front.arn}"
+  target_id        = "${aws_instance.wordpress_1.id}"
+  port             = 80
+}
+
 resource "local_file" "hosts_cfg" {
   content = templatefile("${path.module}/../../templates/hosts.tpl",
     {

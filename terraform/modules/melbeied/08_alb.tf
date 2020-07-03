@@ -3,34 +3,35 @@ resource "aws_alb" "alb" {
   load_balancer_type = "application"
   subnets = aws_subnet.public.*.id
   security_groups = [
-    "${aws_security_group.public_alb_sg.id}",
+    aws_security_group.alb.id,
   ]
   #enable_deletion_protection = true
   ip_address_type = "ipv4"
 }
 
-resource "aws_alb_target_group" "tg" {
-  name     = "alb-target-group"
+resource "aws_alb_target_group" "alb_tg_front" {
+  name     = "alb-front-tg"
   vpc_id   = aws_vpc.melbeied.id
-
   port     = 80
   protocol = "HTTP"
-  
   stickiness {
     type = "lb_cookie"
   }
-  
   health_check {
+    matcher = "200,302"
     path = "/"
     port = 80
-    protocol = "HTTP"
-    
-    // healthy_threshold = "3"
-    // interval = "30"
-    // matcher = "200"
-    // timeout = "5"
-    // unhealthy_threshold = "3"
+    interval = 20
+    timeout = 5
+    healthy_threshold = 4
+    unhealthy_threshold = 2
   }
+}
+resource "aws_alb_target_group_attachment" "alb_front_1" {
+  count            = local.       
+  target_group_arn = "${aws_alb_target_group.alb_front.arn}"
+  target_id        = "${aws_instance.wordpress_1.id}"
+  port             = 80
 }
 
 resource "aws_alb_listener" "listener_http" {
