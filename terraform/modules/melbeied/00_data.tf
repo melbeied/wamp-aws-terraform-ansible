@@ -3,7 +3,6 @@ data "aws_availability_zones" "available" {}
 
 locals {
   az_limit      = 2
-  site_name     = var.domaine_name
   project_name  = "wamp"
   sys_user      = "admin"
 }
@@ -17,8 +16,13 @@ resource "aws_eip" "nat_eip" {
 // data "aws_vpc" "main" {
 //   id = aws_vpc.melbeied.id
 // }
-
-data "aws_route53_zone" "zone" {
-  name         = "${local.site_name}"
-  private_zone = false
+# DNS account
+provider "aws" {
+    alias = "dns_zones"
+    # ... access keys etc/assume role block
 }
+
+# data "aws_route53_zone" "zone" {
+#   name = format("%s.", var.domain_name) # Notice the dot!!!
+#   private_zone = false
+# }

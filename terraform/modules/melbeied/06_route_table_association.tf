@@ -11,9 +11,3 @@ resource "aws_route_table_association" "front_ass" {
   subnet_id       = element(aws_subnet.front.*.id, count.index)
   route_table_id  = aws_route_table.front_rt.id
 }
-# Route table : association with PRIVATE SUBNET : back 1st & 2nd subnet
-// resource "aws_route_table_association" "back_ass" {
-//   count           = length(aws_subnet.back.*.id)
-//   subnet_id       = element(aws_subnet.back.*.id, count.index)
-//   route_table_id  = aws_route_table.back_rt.id
-// }

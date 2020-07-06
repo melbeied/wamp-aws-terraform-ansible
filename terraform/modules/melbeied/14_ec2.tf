@@ -34,14 +34,8 @@ resource "aws_instance" "wp" {
 // TODO : change id for aws_alb_target_group_attachment
 resource "aws_alb_target_group_attachment" "alb_bfornt_http" {
   count            = local.az_limit
-  target_group_arn = aws_alb_target_group.tg.arn
+  target_group_arn = aws_alb_target_group.alb_tg_front.arn
   target_id        = element(aws_instance.wp.*.id, count.index)
-  port             = 80
-}
-
-resource "aws_alb_target_group_attachment" "alb_front_1" {
-  target_group_arn = "${aws_alb_target_group.alb_front.arn}"
-  target_id        = "${aws_instance.wordpress_1.id}"
   port             = 80
 }
 

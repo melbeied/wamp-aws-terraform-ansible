@@ -12,7 +12,7 @@ resource "aws_cloudfront_distribution" "wordpress_cloudfront" {
   }
 
   enabled = true
-  aliases = [ local.site_name, ]
+  aliases = [ var.site_name, "www.${var.domain_name}" ]
 
   default_cache_behavior {
     target_origin_id = "wordpress_cloudfront"
@@ -46,9 +46,10 @@ resource "aws_cloudfront_distribution" "wordpress_cloudfront" {
   }
 
   viewer_certificate {
-    acm_certificate_arn      = aws_acm_certificate.default.arn
+    ///acm_certificate_arn     = aws_acm_certificate.cert.arn
+    acm_certificate_arn      = var.cert_arn
     ssl_support_method       = "sni-only"
-    //cloudfront_default_certificate = true
+    cloudfront_default_certificate = true
     minimum_protocol_version = "TLSv1"
   }
 }

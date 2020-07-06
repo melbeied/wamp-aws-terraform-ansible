@@ -1,4 +1,3 @@
-variable "domaine_name" {}
 variable "ami_id" {}
 
 variable "instance_bastion_type" {}
@@ -16,3 +15,11 @@ variable "db_name" {}
 variable "db_user" {}
 
 variable "db_password" {}
+
+variable "cert_arn" {}
+
+variable "site_name" {}
+
+variable "domain_name" {}
+
+variable "hosted_zone_id" {}

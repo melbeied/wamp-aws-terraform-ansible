@@ -1,6 +1,11 @@
-variable "domaine_name" {
+variable "domain_name" {
   default = "melbeied.net"
 }
+
+variable "site_name" {
+  default = "wamp.melbeied.net"
+}
+
 variable "ami_id" {
   default = "ami-0c24eddbea3a65909" // debian buster
 }
@@ -33,5 +38,8 @@ variable "db_user" {
   default = "root"
 }
 
-variable "db_password" {
-}
+variable "db_password" {}
+
+variable "cert_arn" {}
+
+variable "hosted_zone_id" {}
