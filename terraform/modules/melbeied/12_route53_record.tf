@@ -1,5 +1,5 @@
 resource "aws_route53_record" "validation" {
-  name    = var.site_name
+  name    = format("wamp.%s", var.domain_name)
   type    = "A"
   zone_id = var.hosted_zone_id
   allow_overwrite = true

@@ -10,7 +10,7 @@ resource "aws_cloudfront_distribution" "wordpress_cloudfront" {
       origin_ssl_protocols   = ["TLSv1", "TLSv1.1", "TLSv1.2"]
     }
   }
-
+  http_version = "http1.1"
   enabled = true
   aliases = [ var.site_name, "www.${var.domain_name}" ]
 
@@ -48,6 +48,7 @@ resource "aws_cloudfront_distribution" "wordpress_cloudfront" {
   viewer_certificate {
     ///acm_certificate_arn     = aws_acm_certificate.cert.arn
     acm_certificate_arn      = var.cert_arn
+    //acm_certificate_arn      = aws_acm_certificate.default.arn
     ssl_support_method       = "sni-only"
     cloudfront_default_certificate = true
     minimum_protocol_version = "TLSv1"

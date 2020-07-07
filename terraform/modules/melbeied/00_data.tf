@@ -22,7 +22,7 @@ provider "aws" {
     # ... access keys etc/assume role block
 }
 
-# data "aws_route53_zone" "zone" {
-#   name = format("%s.", var.domain_name) # Notice the dot!!!
-#   private_zone = false
-# }
+data "aws_route53_zone" "zone" {
+  name = format("%s.", var.domain_name) # Notice the dot!!!
+  private_zone = false
+}

@@ -7,7 +7,8 @@ variable "site_name" {
 }
 
 variable "ami_id" {
-  default = "ami-0c24eddbea3a65909" // debian buster
+//default = "ami-000311a1d85fc1ede"  // debian buster eu-west-3
+default = "ami-0c24eddbea3a65909" // debian buster us-east-1
 }
 
 variable "instance_bastion_type" {
