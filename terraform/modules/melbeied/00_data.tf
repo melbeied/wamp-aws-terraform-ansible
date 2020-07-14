@@ -17,10 +17,7 @@ resource "aws_eip" "nat_eip" {
 //   id = aws_vpc.melbeied.id
 // }
 # DNS account
-provider "aws" {
-    alias = "dns_zones"
-    # ... access keys etc/assume role block
-}
+
 
 data "aws_route53_zone" "zone" {
   name = format("%s.", var.domain_name) # Notice the dot!!!
