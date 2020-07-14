@@ -5,3 +5,7 @@
 - ...
 
 
+# check domain and endpoint
+ https://centralops.net/co/
+
+ 

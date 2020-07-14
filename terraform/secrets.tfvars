@@ -1,6 +1,5 @@
-db_password = "123456789"
+db_password = "987654321"
 
-// melbeied.net
-cert_arn = "arn:aws:acm:us-east-1:599271616820:certificate/27369945-e97c-416a-b8db-3a1590d747d6"
+cert_arn = "arn:aws:acm:us-east-1:599271616820:certificate/94fdca24-c155-42da-9a19-64d93a63eac9"
 
-hosted_zone_id = "Z04207553EK9TJ3O07C0K"
+hosted_zone_id = "Z051992918A65WB66C6M"
