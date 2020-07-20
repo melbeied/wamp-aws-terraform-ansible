@@ -5,6 +5,7 @@
 **/.terraform/
 **/*.tfstate
 ./terraform/*.tfvars
+terraform/secrets.tfvars
 keys/
 acm/
 **/keys/
@@ -15,5 +16,10 @@ acm/
 **/*.bck
 **/*.backup
 **/terraform.tfstate.backup
+terraform/terraform.tfstate.backup
+ansible/config
+ansible/logs
+ansible/keygen.sh
+
 
 ./ansible/vars/datasource.yml
